@@ -4909,12 +4909,15 @@ router.get('/getdocument1/:pagesize/:page/:obj', function(req, res) {
         knex.select('customer.*')
             .from('customer')
             .where({ 'customer.status': "APPROVED" })
+                        .orderBy('customer.applieddate', 'desc')
+
             .limit(pageSize).offset(skip)
             .then(function(result) {
 
                 knex.select()
                     .from('customer')
                     .where({ 'customer.status': "APPROVED" })
+                                .orderBy('customer.applieddate', 'desc')
                     .then(function(re) {
                         var a = re.length
                         console.log(a);
@@ -4932,6 +4935,8 @@ router.get('/getdocument1/:pagesize/:page/:obj', function(req, res) {
             .join('addbank', 'addbank.logincreadtedby', 'employee.idemployee')
             .where({ 'backend_operator.status': "APPROVED" })
             .where({ 'addbank.logincreadtedby': req.params.obj })
+                        .orderBy('customer.applieddate', 'desc')
+
             .limit(pageSize).offset(skip)
             .then(function(result) {
 
@@ -4941,6 +4946,8 @@ router.get('/getdocument1/:pagesize/:page/:obj', function(req, res) {
                     .join('addbank', 'addbank.logincreadtedby', 'employee.idemployee')
                     .where({ 'backend_operator.status': "APPROVED" })
                     .where({ 'addbank.logincreadtedby': req.params.obj })
+                                .orderBy('customer.applieddate', 'desc')
+
                     .then(function(re) {
                         var a = re.length
                         console.log(a);
